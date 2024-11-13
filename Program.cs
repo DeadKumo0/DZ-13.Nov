@@ -275,24 +275,21 @@ namespace ConsoleApp7
         }
         public static double Evaluate(string expression)
         {
-            // Стек для хранения операндов
             Stack<double> stack = new Stack<double>();
 
-            // Разбиваем выражение на части (по пробелу)
             string[] tokens = expression.Split(' ');
 
             Console.WriteLine("Шаги вычисления:");
 
             foreach (var token in tokens)
             {
-                if (double.TryParse(token, out double number)) // Если это число
+                if (double.TryParse(token, out double number)) 
                 {
-                    stack.Push(number); // Кладем число в стек
+                    stack.Push(number); 
                     Console.WriteLine($"Число {token} добавлено в стек.");
                 }
-                else // Если это оператор
+                else 
                 {
-                    // Извлекаем два операнда
                     double operand2 = stack.Pop();
                     double operand1 = stack.Pop();
                     double result = 0;
@@ -318,12 +315,11 @@ namespace ConsoleApp7
                             throw new InvalidOperationException("Неизвестный оператор: " + token);
                     }
 
-                    stack.Push(result); // Кладем результат обратно в стек
+                    stack.Push(result); 
                     Console.WriteLine($"Выполняем операцию: {operand1} {token} {operand2} = {result}");
                 }
             }
 
-            // В стеке остается только один элемент — это результат
             if (stack.Count != 1)
                 throw new InvalidOperationException("Ошибка: неверное количество операндов или операторов.");
 
